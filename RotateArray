@@ -1,0 +1,28 @@
+
+#Rotate an array of n elements to the right by k steps.
+
+#For example, with n = 7 and k = 3, the array [1,2,3,4,5,6,7] is rotated to [5,6,7,1,2,3,4].
+
+def rotate_method1(nums, k):
+	for i in range(k):
+		temp=nums[len(nums)-1]
+		for j in range(len(nums)-1, 0, -1):
+			nums[j]=nums[j-1]
+
+		nums[0]=temp
+	return nums
+
+def rotate_method2(nums, k):
+	def reverse(nums, start, end):
+		while start < end:
+			nums[start], nums[end] = nums[end], nums[start]
+			start+=1
+			end-=1
+	n=len(nums)
+	k%=n
+	reverse(nums, 0, n-k-1)
+	reverse(nums, n-k, n-1)
+	reverse(nums, 0, n-1)
+	return nums
+print (rotate_method1([1,2,3,4,5,6,7], 3))
+print (rotate_method2([1,2,3,4,5,6,7], 10))
